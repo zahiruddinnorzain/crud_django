@@ -1,1 +1,1 @@
-web: gunicorn testborla.wsgi --log-file -
+web: gunicorn crudexample.wsgi --log-file -
