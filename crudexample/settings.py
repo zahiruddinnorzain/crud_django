@@ -129,7 +129,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 #heroku setting
 
-if os.getcws() == '/app':
+if os.getcwd() == '/app':
     import dj_databse_url
     db_from_env = dj_databse_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
