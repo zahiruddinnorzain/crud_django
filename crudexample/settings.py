@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', #DJANGO WHITENOISE CONFIGURATION
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,21 +127,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-#heroku setting
-
-if os.getcwd() == '/app':
-    import dj_databse_url
-    db_from_env = dj_databse_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
-    #Honor the 'X-forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    #allow all host header
-    ALLOWED_HOSTS = [testborla.herokuapp.com]
-    DEBUG = True
-
-    #static asset configuration
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+django_heroku.settings(locals())
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
