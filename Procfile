@@ -1,1 +1,1 @@
-web: gunicorn crud_django.wsgi --log-file -
+web: gunicorn testborla.wsgi --log-file -
